@@ -13,4 +13,4 @@ https://data.stadt-zuerich.ch/dataset/geo_3d_blockmodell_lod1
 ## Analyse
 Die gesamte Analyse findet sich im hinterlegten R-Markdown file: [3D_Zurich_Analyse_github.Rmd](3D_Zurich_Analyse_github.Rmd)
 
-Oder sauber lesbar als [html file](3D_Zurich_Analyse_github.html)
+Oder als sauber lesbar [html file](3D_Zurich_Analyse_github.html) (Download nötig, da es von Github nicht direkt angezeigt werden kann.)
