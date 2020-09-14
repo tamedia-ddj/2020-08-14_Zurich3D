@@ -2,7 +2,10 @@
 
 **Artikel**: [Wird publiziert am 14. September 2020](https://www.tagesanzeiger.ch/)
 
-**Code**: [R-Markdown file](3D_Zurich_Analyse_github.Rmd)
+**Code**: 
+* [Aufbereitung: R-Markdown](3D_Zurich_Aufbereitung.Rmd)
+* [Analyse: R-Markdown](3D_Zurich_Analyse_github.Rmd)
+* [HTML-Darstellung der Analyse](3D_Zurich_Analyse_github.html)
 
 
 ## Datengrundlage
@@ -21,6 +24,4 @@ Die gesamte Analyse findet sich im hinterlegten R-Markdown file: [3D_Zurich_Anal
 
 Oder als sauber lesbar [html file](3D_Zurich_Analyse_github.html) (Download nötig, da es von Github nicht direkt angezeigt werden kann.)
 
-* [Aufbereitung](3D_Zurich_Aufbereitung.Rmd)
-* [Analyse](3D_Zurich_Analyse_github.Rmd)
-* [HTML-Darstellung der Analyse](3D_Zurich_Analyse_github.html)
+
