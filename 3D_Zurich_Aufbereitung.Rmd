@@ -22,26 +22,13 @@ warnings()
 
 ```{r intro, results = "markup", message = FALSE}
 library(sf)
-library(leaflet)
-library(RColorBrewer)
 library(knitr)
 library(kableExtra) # nice tables
-library(fasterize) # -->Raster
-library(raster)  # ACHTUNG raster() masked von "raster"
-library(DT) # also nice tables (not used)
-library(RCurl) # upload to ftp
 library(tidyverse) # ACHTUNG raster() masked von "raster"
 
 # Historsichwer vergleich: https://www.stadt-zuerich.ch/content/prd/de/index/statistik/publikationen-angebote/publikationen/webartikel/2018-01-30_Zuerich-waechst-in-die-Breite-und-in-die-Hoehe.html
 
 options(encoding = "UTF-8")
-
-url_wd = "D:/Tamedia/GSync/Datenteam/Projekte_Ideen/3dZürich"
-  
-setwd(url_wd)
-print(getwd())
-
-
 ```
 
 # Übersicht
@@ -60,9 +47,6 @@ plot(grenzen$geometry, main = "Statistische Quartiere")
 knitr::kable(grenzen, digits = 0) %>%
   kable_styling(bootstrap_options = "striped", full_width = F, fixed_thead = T) %>% 
   scroll_box(height = "200px")
-
-# datatable(st_drop_geometry(grenzen), class = 'cell-border stripe')
-
 ```
 
 
@@ -95,8 +79,6 @@ table(shp_2_5_2012_all$sta)
 
 print("Aktuell:")
 table(shp_2_5_aktuell_all$sta)
-
-
 ```
 
 # Gebäudedaten Aufbereiten
@@ -119,7 +101,6 @@ for(i in (1:nrow(grenzen))){
   shp_2_5_aktuell_all[buildings_in_quartier_index, "Kreis"] <- grenzen$kname[i]
   shp_2_5_aktuell_all[buildings_in_quartier_index, "Quartier"] <- grenzen$qname[i]
 }
-
 ```
 
 
