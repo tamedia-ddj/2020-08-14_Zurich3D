@@ -19,7 +19,6 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, results = "
 warnings()
 ```
 
-
 ```{r intro, results = "markup", message = FALSE}
 library(sf)
 library(knitr)
@@ -48,7 +47,6 @@ knitr::kable(grenzen, digits = 0) %>%
   kable_styling(bootstrap_options = "striped", full_width = F, fixed_thead = T) %>% 
   scroll_box(height = "200px")
 ```
-
 
 ## Gebäudedata 
 
@@ -93,7 +91,6 @@ for(i in (1:nrow(grenzen))){
   shp_2_5_2012_all[buildings_in_quartier_index, "Quartier"] <- grenzen$qname[i]
 }
 
-
 ## Aktuell
 for(i in (1:nrow(grenzen))){
   print(str_c(grenzen$kname[i], ": ", grenzen$qname[i]))
@@ -103,7 +100,6 @@ for(i in (1:nrow(grenzen))){
 }
 ```
 
-
 Speichern als GEOJSON:
 ```{r, results = "markup"}
 PATH_geojson <- str_c("Data_output/", "2012_buildings.geojson")
@@ -112,4 +108,3 @@ st_write(shp_2_5_2012_all, dsn = PATH_geojson, driver = "GeoJSON")
 PATH_geojson <- str_c("Data_output/", "Aktuell_buildings.geojson")
 st_write(shp_2_5_aktuell_all, dsn = PATH_geojson, driver = "GeoJSON")  
 ```
-
