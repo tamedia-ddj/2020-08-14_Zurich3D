@@ -1,0 +1,134 @@
+---
+title: "Zurich 3D Data Preparation"
+author: "Patrick Meier"
+date: "7. August 2020"
+output:
+  html_document:
+    code_folding: hide
+    toc: true
+    toc_depth: 3
+    toc_float:
+      collapsed: true
+      smooth_scroll: true
+    theme: simplex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, results = "hide")
+# knitr::knit(..., encoding = getOption("encoding")) 
+warnings()
+```
+
+
+```{r intro, results = "markup", message = FALSE}
+library(sf)
+library(leaflet)
+library(RColorBrewer)
+library(knitr)
+library(kableExtra) # nice tables
+library(fasterize) # -->Raster
+library(raster)  # ACHTUNG raster() masked von "raster"
+library(DT) # also nice tables (not used)
+library(RCurl) # upload to ftp
+library(tidyverse) # ACHTUNG raster() masked von "raster"
+
+# Historsichwer vergleich: https://www.stadt-zuerich.ch/content/prd/de/index/statistik/publikationen-angebote/publikationen/webartikel/2018-01-30_Zuerich-waechst-in-die-Breite-und-in-die-Hoehe.html
+
+options(encoding = "UTF-8")
+
+url_wd = "D:/Tamedia/GSync/Datenteam/Projekte_Ideen/3dZürich"
+  
+setwd(url_wd)
+print(getwd())
+
+
+```
+
+# Übersicht
+Analyse der Entwicklung der Gebäudehöhen in der Stadt Zürich zwischen 2012 und jetzt (August 2020).
+
+# Daten
+
+## Quartierdefinitionen 
+Von Zürich Open Data
+
+```{r}
+## Read Quartiergrenzen from Shapefile
+grenzen <- st_read("Data_input/Quartiergrenzen/data/stzh.adm_statistische_quartiere_map_polygon.shp")
+plot(grenzen$geometry, main = "Statistische Quartiere")  
+
+knitr::kable(grenzen, digits = 0) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, fixed_thead = T) %>% 
+  scroll_box(height = "200px")
+
+# datatable(st_drop_geometry(grenzen), class = 'cell-border stripe')
+
+```
+
+
+## Gebäudedata 
+
+Daten von Zürich Open Data. Shapefiles mit den Grundrissen aller Gebäude. Die Höhe der Gebäude ist als Attribut hinterlegt (2.5 D)
+
+aktueller Stand: https://data.stadt-zuerich.ch/dataset/geo_3d_blockmodell_lod1
+
+Stand 2012: https://data.stadt-zuerich.ch/dataset/geo_3d_blockmodell_lod1_jahresendstand_2012
+
+Es sind sowohl real existierende Gebäude erfasst, als auch eingereichte oder freigegebene Baubewilligungen. Für den Stand 2012 werden nur die real existierenden Gebäude und bewilligten Baubewilligungen berücksichtigt. Für den aktuellen Stand werden auch die eingereichten, aber noch nicht freigegebenen Baubewilligungen berücksichtigt.
+
+Einlesen:
+
+```{r import, results = "markup"}
+
+## read data ####
+
+## Read 2.5D from Shapefile 2012
+shp_2_5_2012_all <- st_read("Data_input/ZH_2012/data/geoz_2012.lod1_2_5d_polygon.shp")
+shp_2_5_aktuell_all <- st_read("Data_input/ZH_aktuell/data/geoz.lod1_2_5d_polygon.shp")
+```
+
+Status der Gebäude:
+```{r}
+
+print("2012:")
+table(shp_2_5_2012_all$sta)
+
+print("Aktuell:")
+table(shp_2_5_aktuell_all$sta)
+
+
+```
+
+# Gebäudedaten Aufbereiten
+
+Füge für Gebäuden den Kreis und das Quartier hinzu
+```{r import, results = "markup"}
+## 2012
+for(i in (1:nrow(grenzen))){
+  print(str_c(grenzen$kname[i], ": ", grenzen$qname[i]))
+  buildings_in_quartier_index <- unlist(st_contains(grenzen[i, ], st_centroid(shp_2_5_2012_all), sparse = TRUE, prepared = TRUE))
+  shp_2_5_2012_all[buildings_in_quartier_index, "Kreis"] <- grenzen$kname[i]
+  shp_2_5_2012_all[buildings_in_quartier_index, "Quartier"] <- grenzen$qname[i]
+}
+
+
+## Aktuell
+for(i in (1:nrow(grenzen))){
+  print(str_c(grenzen$kname[i], ": ", grenzen$qname[i]))
+  buildings_in_quartier_index <- unlist(st_contains(grenzen[i, ], st_centroid(shp_2_5_aktuell_all), sparse = TRUE, prepared = TRUE))
+  shp_2_5_aktuell_all[buildings_in_quartier_index, "Kreis"] <- grenzen$kname[i]
+  shp_2_5_aktuell_all[buildings_in_quartier_index, "Quartier"] <- grenzen$qname[i]
+}
+
+```
+
+
+Speichern als GEOJSON:
+```{r, results = "markup"}
+PATH_geojson <- str_c("Data_output/", "2012_buildings.geojson")
+st_write(shp_2_5_2012_all, dsn = PATH_geojson, driver = "GeoJSON") 
+
+PATH_geojson <- str_c("Data_output/", "Aktuell_buildings.geojson")
+st_write(shp_2_5_aktuell_all, dsn = PATH_geojson, driver = "GeoJSON")  
+```
+
