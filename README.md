@@ -2,10 +2,11 @@
 
 **Artikel**: ["Hier schiesst Zürich in die Höhe"](https://www.tagesanzeiger.ch/hier-schiesst-zuerich-in-die-hoehe-336605433294), Tagesanzeiger 18. September 2020
 
-**Code**: 
+**Quick-Access**: 
 * [Aufbereitung: R-Markdown](3D_Zurich_Aufbereitung.Rmd)
 * [Analyse: R-Markdown](3D_Zurich_Analyse_github.Rmd)
-* [HTML-Darstellung der Analyse](3D_Zurich_Analyse_github.html)
+* [HTML-Darstellung der Analyse](https://interaktiv.tagesanzeiger.ch//2020/daten_Zurich3D/3D_Zurich_Analyse_github.html)
+* [HTML-File auf Github](3D_Zurich_Analyse_github.html)
 
 
 ## Datengrundlage
@@ -22,4 +23,4 @@ Der erste Schritt ist die Aufbereitung der Daten in einem [eigenen Script](3D_Zu
 
 Die gesamte Analyse findet sich im hinterlegten R-Markdown file: [3D_Zurich_Analyse_github.Rmd](3D_Zurich_Analyse_github.Rmd)
 
-Oder als sauber lesbar inklusive Resultate und Visualisierung als [html file](3D_Zurich_Analyse_github.html) (Download nötig, da es von Github nicht direkt angezeigt werden kann.)
+Oder als sauber lesbar inklusive Resultate und Visualisierung als [html file](https://interaktiv.tagesanzeiger.ch//2020/daten_Zurich3D/3D_Zurich_Analyse_github.html) (Gehostet auf Tagesanzeiger Server.)
