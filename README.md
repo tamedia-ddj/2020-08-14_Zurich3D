@@ -1,6 +1,6 @@
 # Analyse der Entwicklung der Gebäudehöhen der Stadt Zürich
 
-**Artikel**: [Wird publiziert am 14. September 2020](https://www.tagesanzeiger.ch/)
+**Artikel**: [Tagesanzeiger, 18. September 2020](https://www.tagesanzeiger.ch/hier-schiesst-zuerich-in-die-hoehe-336605433294)
 
 **Code**: 
 * [Aufbereitung: R-Markdown](3D_Zurich_Aufbereitung.Rmd)
