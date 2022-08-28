@@ -23,4 +23,4 @@ Der erste Schritt ist die Aufbereitung der Daten in einem [eigenen Script](3D_Zu
 
 Die gesamte Analyse findet sich im hinterlegten R-Markdown file: [3D_Zurich_Analyse_github.Rmd](3D_Zurich_Analyse_github.Rmd)
 
-Oder als sauber lesbar inklusive Resultate und Visualisierung als [html file](https://interaktiv.tagesanzeiger.ch//2020/daten_Zurich3D/3D_Zurich_Analyse_github.html) (Gehostet auf Tagesanzeiger Server.)
+Oder sauber lesbar inklusive Resultate und Visualisierung als [html file](https://interaktiv.tagesanzeiger.ch/2020/daten_Zurich3D/3D_Zurich_Analyse_github.html) (Gehostet auf Tagesanzeiger Server.)
