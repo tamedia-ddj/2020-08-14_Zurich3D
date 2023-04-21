@@ -5,7 +5,7 @@
 **Quick-Access**: 
 * [Aufbereitung: R-Markdown](3D_Zurich_Aufbereitung.Rmd)
 * [Analyse: R-Markdown](3D_Zurich_Analyse_github.Rmd)
-* [HTML-Darstellung der Analyse](https://interaktiv.tagesanzeiger.ch//2020/daten_Zurich3D/3D_Zurich_Analyse_github.html)
+* [HTML-Darstellung der Analyse](https://interaktiv.tagesanzeiger.ch/2020/daten_Zurich3D/3D_Zurich_Analyse_github.html)
 * [HTML-File auf Github](3D_Zurich_Analyse_github.html)
 
 
